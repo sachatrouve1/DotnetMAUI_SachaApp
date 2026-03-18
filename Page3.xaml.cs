@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SachaApp;
 
-public partial class Porter : ContentPage
+public partial class Page3 : ContentPage
 {
-    public Porter()
+    public Page3()
     {
         InitializeComponent();
     }

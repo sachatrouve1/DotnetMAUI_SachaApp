@@ -37,6 +37,11 @@
                         Aspect="AspectFit"
                         SemanticProperties.Description="beer" />
                 </Grid>
+
+                <Button
+                    Text="Play GIF"
+                    HorizontalOptions="Center"
+                    Clicked="NavigateToGif_Clicked" />
             </VerticalStackLayout>
         </ScrollView>
     </ContentPage.Content>

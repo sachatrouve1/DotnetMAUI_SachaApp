@@ -12,4 +12,9 @@ public partial class MainPage : ContentPage
     {
         InitializeComponent();
     }
+
+    private async void NavigateToGif_Clicked(object? sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(AppShell.GifPageRoute);
+    }
 }

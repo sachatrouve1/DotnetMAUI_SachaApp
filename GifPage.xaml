@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SachaApp.GifPage"
+             Title="GIF Player">
+    <Grid Padding="24" RowDefinitions="*,Auto" RowSpacing="16">
+        <Image x:Name="GifImage"
+               Source="beer_time.gif"
+               IsAnimationPlaying="True"
+               Aspect="AspectFit"
+               SemanticProperties.Description="Beer animation" />
+
+        <Button x:Name="BackButton"
+                Grid.Row="1"
+                Text="Playing..."
+                IsEnabled="False"
+                Clicked="OnBackButtonClicked" />
+    </Grid>
+</ContentPage>
+

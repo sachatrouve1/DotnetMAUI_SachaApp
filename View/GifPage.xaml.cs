@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SachaApp;
+namespace SachaApp.View;
 
 public partial class GifPage : ContentPage
 {

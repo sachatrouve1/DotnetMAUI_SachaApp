@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace SachaApp;
+namespace SachaApp.View;
 
 public partial class App : Application
 {

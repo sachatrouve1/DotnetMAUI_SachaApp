@@ -1,4 +1,4 @@
-﻿namespace SachaApp;
+﻿namespace SachaApp.View;
 
 public partial class AppShell : Shell
 {

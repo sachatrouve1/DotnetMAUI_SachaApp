@@ -1,7 +1,8 @@
 using System;
 using System.Threading.Tasks;
+using SachaApp.Animations;
 
-namespace SachaApp;
+namespace SachaApp.View;
 
 public partial class MainPage : ContentPage
 {

@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using SachaApp.View;
+using SachaApp.Services;
 
 namespace SachaApp;
 
@@ -14,6 +16,8 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
+
+        var beerApi = new BeerService();
 
 #if DEBUG
         builder.Logging.AddDebug();

@@ -2,7 +2,7 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SachaApp.MainPage">
+             x:Class="SachaApp.View.Page2">
     <ContentPage.Content>
         <Grid>
             <ScrollView>
@@ -11,38 +11,16 @@
                     Spacing="25">
                 
                 <Label
-                    Text="BeerGrills"
+                    Text="Lager"
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
-                    FontSize="32" />
-                
-                <Label
-                    Text="Welcome to the BeerGrills app!"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    FontSize="20" />
+                    FontSize="32"/>
 
-                <Grid ColumnDefinitions="*,*"
-                      ColumnSpacing="12">
                     <Image
-                        Grid.Column="0"
-                        Source="beers1.png"
+                        Source="lager.png"
                         HeightRequest="185"
                         Aspect="AspectFit"
                         SemanticProperties.Description="beer" />
-
-                    <Image
-                        Grid.Column="1"
-                        Source="beers2.png"
-                        HeightRequest="185"
-                        Aspect="AspectFit"
-                        SemanticProperties.Description="beer" />
-                </Grid>
-
-                    <Button
-                        Text="Play GIF"
-                        HorizontalOptions="Center"
-                        Clicked="NavigateToGif_Clicked" />
                 </VerticalStackLayout>
             </ScrollView>
 

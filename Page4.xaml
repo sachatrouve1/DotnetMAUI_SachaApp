@@ -4,10 +4,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SachaApp.Page4">
     <ContentPage.Content>
-        <ScrollView>
-            <VerticalStackLayout
-                Padding="30,0"
-                Spacing="25">
+        <Grid>
+            <ScrollView>
+                <VerticalStackLayout
+                    Padding="30,0"
+                    Spacing="25">
                 
                 <Label
                     Text="Pilsner"
@@ -15,12 +16,24 @@
                     HorizontalTextAlignment="Center"
                     FontSize="32"/>
 
-                <Image
-                    Source="Pilsner.png"
-                    HeightRequest="185"
-                    Aspect="AspectFit"
-                    SemanticProperties.Description="beer" />
-            </VerticalStackLayout>
-        </ScrollView>
+                    <Image
+                        Source="pilsner.png"
+                        HeightRequest="185"
+                        Aspect="AspectFit"
+                        SemanticProperties.Description="beer" />
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <AbsoluteLayout x:Name="BubbleLayer"
+                            InputTransparent="True"
+                            Margin="16">
+                <Border x:Name="Bubble1" WidthRequest="14" HeightRequest="14" BackgroundColor="#66FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 999" />
+                <Border x:Name="Bubble2" WidthRequest="10" HeightRequest="10" BackgroundColor="#55FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 999" />
+                <Border x:Name="Bubble3" WidthRequest="18" HeightRequest="18" BackgroundColor="#55FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 999" />
+                <Border x:Name="Bubble4" WidthRequest="12" HeightRequest="12" BackgroundColor="#66FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 999" />
+                <Border x:Name="Bubble5" WidthRequest="9" HeightRequest="9" BackgroundColor="#55FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 999" />
+                <Border x:Name="Bubble6" WidthRequest="16" HeightRequest="16" BackgroundColor="#66FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 999" />
+            </AbsoluteLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

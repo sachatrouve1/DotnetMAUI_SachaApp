@@ -1,15 +1,17 @@
-using System.Threading.Tasks;
 using SachaApp.Animations;
+using SachaApp.ViewModel;
 
 namespace SachaApp.View;
 
-public partial class Page2 : ContentPage
+public partial class Page2
 {
     private BubbleAnimator? _bubbleAnimator;
+    private readonly Page2ViewModel _viewModel = new();
 
     public Page2()
     {
         InitializeComponent();
+        BindingContext = _viewModel;
     }
 
     protected override async void OnAppearing()
@@ -19,6 +21,8 @@ public partial class Page2 : ContentPage
         _bubbleAnimator ??= new BubbleAnimator(Bubble1, Bubble2, Bubble3, Bubble4, Bubble5, Bubble6);
         await WaitForBubbleLayerAsync();
         _bubbleAnimator.Start(BubbleLayer.Width, BubbleLayer.Height);
+
+        await _viewModel.LoadAsync();
     }
 
     protected override void OnDisappearing()

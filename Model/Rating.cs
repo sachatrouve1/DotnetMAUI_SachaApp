@@ -1,7 +1,10 @@
-namespace SachaApp.Models;
+using System.Text.Json.Serialization;
+
+namespace SachaApp.Model;
 
 public class Rating
 {
-    public float Average { get; set; }
-    public int Reviews { get; set; }
+    public double Average { get; set; }
+    [JsonConverter(typeof(FlexibleStringJsonConverter))]
+    public string? Reviews { get; set; }
 }

@@ -2,29 +2,104 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SachaApp.View.Page2">
+             xmlns:model="clr-namespace:SachaApp.Models"
+             xmlns:vm="clr-namespace:SachaApp.ViewModel"
+             x:Class="SachaApp.View.Page2"
+             x:DataType="vm:Page2ViewModel">
     <ContentPage.Content>
-        <Grid>
-            <ScrollView>
-                <VerticalStackLayout
-                    Padding="30,0"
-                    Spacing="25">
-                
+        <Grid RowDefinitions="Auto,*,Auto">
+            <VerticalStackLayout Grid.Row="0" Spacing="2" Margin="0,12,0,8">
                 <Label
-                    Text="Lager"
+                    Text="Toutes les bieres"
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
-                    FontSize="32"/>
+                    FontSize="32" />
 
+                <Label
+                    Text="{Binding BeerCountText}"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    FontSize="13"
+                    Opacity="0.8" />
+            </VerticalStackLayout>
+
+            <CollectionView
+                Grid.Row="1"
+                ItemsSource="{Binding Beers}"
+                Margin="16,0"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedBeer, Mode=TwoWay}">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout Spacing="10" Padding="16" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Label
+                            Text="{Binding LoadStatusText}"
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center" />
+                        <Button
+                            Text="Reessayer"
+                            Command="{Binding RetryCommand}"
+                            HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Beer">
+                        <Border StrokeThickness="0"
+                                BackgroundColor="#1FFFFFFF"
+                                Padding="10"
+                                Margin="0,6"
+                                StrokeShape="RoundRectangle 12">
+                            <Grid ColumnDefinitions="72,*" ColumnSpacing="12">
+                                <Image
+                                    Grid.Column="0"
+                                    Source="{Binding Image}"
+                                    HeightRequest="64"
+                                    WidthRequest="64"
+                                    Aspect="AspectFill" />
+
+                                <Label
+                                    Grid.Column="1"
+                                    Text="{Binding Name}"
+                                    VerticalOptions="Center"
+                                    FontSize="16"
+                                    LineBreakMode="TailTruncation" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Border
+                Grid.Row="2"
+                Margin="16,8,16,16"
+                Padding="12"
+                StrokeThickness="0"
+                BackgroundColor="#2AFFFFFF"
+                StrokeShape="RoundRectangle 12">
+                <Grid ColumnDefinitions="90,*" ColumnSpacing="12">
                     <Image
-                        Source="lager.png"
-                        HeightRequest="185"
-                        Aspect="AspectFit"
-                        SemanticProperties.Description="beer" />
-                </VerticalStackLayout>
-            </ScrollView>
+                        Grid.Column="0"
+                        Source="{Binding SelectedBeerImage}"
+                        HeightRequest="84"
+                        WidthRequest="84"
+                        Aspect="AspectFill" />
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
+                        <Label
+                            Text="{Binding SelectedBeerName}"
+                            FontSize="18"
+                            FontAttributes="Bold"
+                            LineBreakMode="TailTruncation" />
+
+                        <Label
+                            Text="{Binding SelectedBeerDescription}"
+                            FontSize="14"
+                            LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
 
             <AbsoluteLayout x:Name="BubbleLayer"
+                            Grid.RowSpan="3"
                             InputTransparent="True"
                             Margin="16">
                 <Border x:Name="Bubble1" WidthRequest="14" HeightRequest="14" BackgroundColor="#66FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 999" />

@@ -42,6 +42,8 @@
                     <Button
                         Text="Play GIF"
                         HorizontalOptions="Center"
+                        BackgroundColor="#8E44AD"
+                        TextColor="White"
                         Clicked="NavigateToGif_Clicked" />
                 </VerticalStackLayout>
             </ScrollView>

@@ -9,13 +9,38 @@
                 <VerticalStackLayout
                     Padding="30,0"
                     Spacing="25">
-                
-                <Label
-                    Text="Add your own beer!"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    FontSize="32"/>
-                   
+                    <Label
+                        Text="Add your own beer!"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        FontSize="32" />
+
+                    <Entry
+                        x:Name="TitleEntry"
+                        Placeholder="Beer's title"
+                        ClearButtonVisibility="WhileEditing" />
+
+                    <Editor
+                        x:Name="DescriptionEditor"
+                        Placeholder="Description"
+                        AutoSize="TextChanges"
+                        MinimumHeightRequest="120" />
+
+                    <Entry
+                        x:Name="ImageEntry"
+                        Placeholder="Image (URL or local file)"
+                        TextChanged="OnImageEntryTextChanged"
+                        ClearButtonVisibility="WhileEditing" />
+
+                    <Image
+                        x:Name="PreviewImage"
+                        HeightRequest="150"
+                        Aspect="AspectFit"
+                        IsVisible="False" />
+
+                    <Button
+                        Text="Add to the shop"
+                        Clicked="OnAddBeerClicked" />
                 </VerticalStackLayout>
             </ScrollView>
 

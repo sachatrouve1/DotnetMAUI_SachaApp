@@ -9,6 +9,7 @@ namespace SachaApp.ViewModel;
 public class Page2ViewModel : INotifyPropertyChanged
 {
     private readonly BeerService _beerService;
+    private readonly BeerCatalogService _beerCatalogService;
     private Beer? _selectedBeer;
     private string _loadStatusText = "Chargement des bieres...";
     private bool _isLoading;
@@ -18,13 +19,14 @@ public class Page2ViewModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 
     public Page2ViewModel()
-        : this(new BeerService())
+        : this(new BeerService(), new BeerCatalogService())
     {
     }
 
-    public Page2ViewModel(BeerService beerService)
+    public Page2ViewModel(BeerService beerService, BeerCatalogService beerCatalogService)
     {
         _beerService = beerService;
+        _beerCatalogService = beerCatalogService;
     }
 
     public string BeerCountText => $"{Beers.Count} elements";
@@ -76,6 +78,11 @@ public class Page2ViewModel : INotifyPropertyChanged
             }
 
             var price = SelectedBeer.Price ?? "n/a";
+            if (!string.IsNullOrWhiteSpace(SelectedBeer.Description))
+            {
+                return SelectedBeer.Description;
+            }
+
             var ratingText = SelectedBeer.Rating is { } rating
                 ? $"{rating.Average:0.0}/5 ({rating.Reviews ?? "n/a"})"
                 : "n/a";
@@ -111,6 +118,11 @@ public class Page2ViewModel : INotifyPropertyChanged
             foreach (var beer in beers)
             {
                 Beers.Add(beer);
+            }
+
+            foreach (var manualBeer in _beerCatalogService.ManualBeers)
+            {
+                Beers.Add(manualBeer);
             }
 
             OnPropertyChanged(nameof(BeerCountText));

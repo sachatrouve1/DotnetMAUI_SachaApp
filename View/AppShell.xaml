@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <Shell
     x:Class="SachaApp.View.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SachaApp.View">
-    
+
     <TabBar>
         <Tab Title="Home" Icon="home.svg">
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
@@ -12,7 +13,7 @@
         <Tab Title="Shop" Icon="search.svg">
             <ShellContent ContentTemplate="{DataTemplate local:ShopPage}" Route="ShopPage" />
         </Tab>
-        <Tab Title="You beer" Icon="favorite.svg">
+        <Tab Title="Your beer" Icon="favorite.svg">
             <ShellContent ContentTemplate="{DataTemplate local:AddPage}" Route="AddPage" />
         </Tab>
         <Tab Title="Pilsner" Icon="settings.svg">

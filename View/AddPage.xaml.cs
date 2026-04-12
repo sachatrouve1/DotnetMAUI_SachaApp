@@ -1,15 +1,51 @@
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using SachaApp.Animations;
+using SachaApp.Services;
 
 namespace SachaApp.View;
 
 public partial class AddPage : ContentPage
 {
     private BubbleAnimator? _bubbleAnimator;
+    private readonly BeerCatalogService _beerCatalogService;
 
     public AddPage()
     {
         InitializeComponent();
+        _beerCatalogService = IPlatformApplication.Current?.Services.GetService<BeerCatalogService>() ?? new BeerCatalogService();
+    }
+
+    private async void OnAddBeerClicked(object? sender, EventArgs e)
+    {
+        var title = TitleEntry.Text?.Trim() ?? string.Empty;
+        var description = DescriptionEditor.Text?.Trim() ?? string.Empty;
+        var image = ImageEntry.Text?.Trim() ?? string.Empty;
+
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            await DisplayAlertAsync("Champ requis", "Ajoute un titre avant de valider.", "OK");
+            return;
+        }
+
+        _beerCatalogService.AddManualBeer(title, description, image);
+
+        TitleEntry.Text = string.Empty;
+        DescriptionEditor.Text = string.Empty;
+        ImageEntry.Text = string.Empty;
+        PreviewImage.Source = null;
+        PreviewImage.IsVisible = false;
+
+        await Shell.Current.GoToAsync("//ShopPage");
+    }
+
+    private void OnImageEntryTextChanged(object? sender, TextChangedEventArgs e)
+    {
+        var imagePath = e.NewTextValue?.Trim();
+        var hasImage = !string.IsNullOrWhiteSpace(imagePath);
+
+        PreviewImage.IsVisible = hasImage;
+        PreviewImage.Source = hasImage ? imagePath : null;
     }
 
     protected override async void OnAppearing()

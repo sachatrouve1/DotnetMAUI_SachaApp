@@ -7,12 +7,12 @@ namespace SachaApp.View;
 public partial class ShopPage
 {
     private BubbleAnimator? _bubbleAnimator;
-    private readonly Page2ViewModel _viewModel;
+    private readonly ShopViewModel _viewModel;
 
     public ShopPage()
     {
         InitializeComponent();
-        _viewModel = IPlatformApplication.Current?.Services.GetService<Page2ViewModel>() ?? new Page2ViewModel();
+        _viewModel = IPlatformApplication.Current?.Services.GetService<ShopViewModel>() ?? new ShopViewModel();
         BindingContext = _viewModel;
     }
 

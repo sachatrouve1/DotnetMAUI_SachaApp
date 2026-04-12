@@ -20,7 +20,9 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<BeerService>();
         builder.Services.AddSingleton<BeerCatalogService>();
-        builder.Services.AddSingleton<Page2ViewModel>();
+        builder.Services.AddSingleton<FavoritesService>();
+        builder.Services.AddSingleton<ShopViewModel>();
+        builder.Services.AddSingleton<LabViewModel>();
 
 #if DEBUG
         builder.Logging.AddDebug();

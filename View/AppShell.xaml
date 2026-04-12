@@ -16,8 +16,8 @@
         <Tab Title="Your beer" Icon="favorite.svg">
             <ShellContent ContentTemplate="{DataTemplate local:AddPage}" Route="AddPage" />
         </Tab>
-        <Tab Title="Pilsner" Icon="settings.svg">
-            <ShellContent ContentTemplate="{DataTemplate local:Page4}" Route="Page4" />
+        <Tab Title="Lab" Icon="settings.svg">
+            <ShellContent ContentTemplate="{DataTemplate local:LabPage}" Route="LabPage" />
         </Tab>
     </TabBar>
 

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:SachaApp.Model"
+             xmlns:vm="clr-namespace:SachaApp.ViewModel"
+             x:Class="SachaApp.View.LabPage"
+             x:Name="PageRoot"
+             x:DataType="vm:LabViewModel">
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView>
+                <VerticalStackLayout Padding="22,12,22,24" Spacing="16">
+                    <Label Text="Beer lab"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           FontSize="30" />
+
+                    <Label Text="Beer Comparison"
+                           FontAttributes="Bold"
+                           FontSize="18" />
+
+                    <Picker Title="Beer A"
+                            ItemsSource="{Binding AllBeers}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedBeerA}" />
+
+                    <Picker Title="Beer B"
+                            ItemsSource="{Binding AllBeers}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedBeerB}" />
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Border Grid.Column="0" Padding="10" StrokeThickness="0" BackgroundColor="#1FFFFFFF" StrokeShape="RoundRectangle 12">
+                            <VerticalStackLayout Spacing="6">
+                                <Image Source="{Binding CompareImageA}" HeightRequest="90" Aspect="AspectFill" />
+                                <Label Text="{Binding CompareNameA}" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding CompareDetailsA}" FontSize="12" LineBreakMode="WordWrap" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="1" Padding="10" StrokeThickness="0" BackgroundColor="#1FFFFFFF" StrokeShape="RoundRectangle 12">
+                            <VerticalStackLayout Spacing="6">
+                                <Image Source="{Binding CompareImageB}" HeightRequest="90" Aspect="AspectFill" />
+                                <Label Text="{Binding CompareNameB}" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                                <Label Text="{Binding CompareDetailsB}" FontSize="12" LineBreakMode="WordWrap" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <Label Text="My Collection"
+                           FontAttributes="Bold"
+                           FontSize="18" />
+
+                    <Picker Title="Filter"
+                            ItemsSource="{Binding FilterOptions}"
+                            SelectedItem="{Binding SelectedFilter}" />
+
+                    <CollectionView ItemsSource="{Binding FilteredBeers}"
+                                    SelectionMode="Single"
+                                    SelectedItem="{Binding SelectedListBeer, Mode=TwoWay}"
+                                    HeightRequest="220">
+                        <CollectionView.EmptyView>
+                            <Label Text="{Binding LoadStatusText}" HorizontalTextAlignment="Center" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Beer">
+                                <Border StrokeThickness="0" BackgroundColor="#1FFFFFFF" Padding="8" Margin="0,4" StrokeShape="RoundRectangle 10">
+                                    <Grid ColumnDefinitions="56,*" ColumnSpacing="10">
+                                        <Image Grid.Column="0" Source="{Binding Image}" HeightRequest="52" WidthRequest="52" Aspect="AspectFill" />
+                                        <Label Grid.Column="1" Text="{Binding Name}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Label Text="{Binding SelectedListBeerName}" FontAttributes="Bold" />
+                    <Label Text="{Binding SelectedListBeerTagText}" FontSize="12" />
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button Grid.Column="0" Text="Toggle Favorite" Command="{Binding ToggleFavoriteCommand}" />
+                        <Button Grid.Column="1" Text="Toggle Wishlist" Command="{Binding ToggleWishlistCommand}" />
+                    </Grid>
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <AbsoluteLayout x:Name="BubbleLayer"
+                            InputTransparent="True"
+                            Margin="16">
+                <Border x:Name="Bubble1" WidthRequest="14" HeightRequest="14" BackgroundColor="#66FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 999" />
+                <Border x:Name="Bubble2" WidthRequest="10" HeightRequest="10" BackgroundColor="#55FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 999" />
+                <Border x:Name="Bubble3" WidthRequest="18" HeightRequest="18" BackgroundColor="#55FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 999" />
+                <Border x:Name="Bubble4" WidthRequest="12" HeightRequest="12" BackgroundColor="#66FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 999" />
+                <Border x:Name="Bubble5" WidthRequest="9" HeightRequest="9" BackgroundColor="#55FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 999" />
+                <Border x:Name="Bubble6" WidthRequest="16" HeightRequest="16" BackgroundColor="#66FFFFFF" StrokeThickness="0" StrokeShape="RoundRectangle 999" />
+            </AbsoluteLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

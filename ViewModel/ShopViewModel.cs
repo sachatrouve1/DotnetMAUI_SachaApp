@@ -6,7 +6,7 @@ using SachaApp.Services;
 
 namespace SachaApp.ViewModel;
 
-public class Page2ViewModel : INotifyPropertyChanged
+public class ShopViewModel : INotifyPropertyChanged
 {
     private readonly BeerService _beerService;
     private readonly BeerCatalogService _beerCatalogService;
@@ -18,12 +18,12 @@ public class Page2ViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public Page2ViewModel()
+    public ShopViewModel()
         : this(new BeerService(), new BeerCatalogService())
     {
     }
 
-    public Page2ViewModel(BeerService beerService, BeerCatalogService beerCatalogService)
+    public ShopViewModel(BeerService beerService, BeerCatalogService beerCatalogService)
     {
         _beerService = beerService;
         _beerCatalogService = beerCatalogService;

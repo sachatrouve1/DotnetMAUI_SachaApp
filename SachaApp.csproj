@@ -93,7 +93,7 @@
       <MauiXaml Update="View\AddPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
-      <MauiXaml Update="View\Page4.xaml">
+      <MauiXaml Update="View\LabPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
       <MauiXaml Update="View\App.xaml">
@@ -121,7 +121,7 @@
         <DependentUpon>Page3.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="View\Page4.xaml.cs">
+      <Compile Update="View\LabPage.xaml.cs">
         <DependentUpon>Page4.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>

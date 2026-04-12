@@ -1,15 +1,20 @@
-using System.Threading.Tasks;
 using SachaApp.Animations;
+using SachaApp.Services;
+using SachaApp.ViewModel;
 
 namespace SachaApp.View;
 
-public partial class Page4 : ContentPage
+public partial class LabPage : ContentPage
 {
     private BubbleAnimator? _bubbleAnimator;
+    private readonly LabViewModel _viewModel;
 
-    public Page4()
+    public LabPage()
     {
         InitializeComponent();
+        _viewModel = IPlatformApplication.Current?.Services.GetService<LabViewModel>()
+            ?? new LabViewModel(new BeerService(), new BeerCatalogService(), new FavoritesService());
+        BindingContext = _viewModel;
     }
 
     protected override async void OnAppearing()
@@ -19,6 +24,8 @@ public partial class Page4 : ContentPage
         _bubbleAnimator ??= new BubbleAnimator(Bubble1, Bubble2, Bubble3, Bubble4, Bubble5, Bubble6);
         await WaitForBubbleLayerAsync();
         _bubbleAnimator.Start(BubbleLayer.Width, BubbleLayer.Height);
+
+        await _viewModel.LoadAsync();
     }
 
     protected override void OnDisappearing()

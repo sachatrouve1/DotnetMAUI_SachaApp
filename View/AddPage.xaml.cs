@@ -24,11 +24,11 @@ public partial class AddPage : ContentPage
 
         if (string.IsNullOrWhiteSpace(title))
         {
-            await DisplayAlertAsync("Champ requis", "Ajoute un titre avant de valider.", "OK");
+            await DisplayAlertAsync("Required field", "Add a title before submitting.", "OK");
             return;
         }
 
-        _beerCatalogService.AddManualBeer(title, description, image);
+        await _beerCatalogService.AddManualBeerAsync(title, description, image);
 
         TitleEntry.Text = string.Empty;
         DescriptionEditor.Text = string.Empty;

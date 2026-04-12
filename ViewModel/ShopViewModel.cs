@@ -11,7 +11,7 @@ public class ShopViewModel : INotifyPropertyChanged
     private readonly BeerService _beerService;
     private readonly BeerCatalogService _beerCatalogService;
     private Beer? _selectedBeer;
-    private string _loadStatusText = "Chargement des bieres...";
+    private string _loadStatusText = "Loading beers...";
     private bool _isLoading;
 
     public ObservableCollection<Beer> Beers { get; } = [];
@@ -29,7 +29,7 @@ public class ShopViewModel : INotifyPropertyChanged
         _beerCatalogService = beerCatalogService;
     }
 
-    public string BeerCountText => $"{Beers.Count} elements";
+    public string BeerCountText => $"{Beers.Count} items";
 
     public string LoadStatusText
     {
@@ -64,9 +64,9 @@ public class ShopViewModel : INotifyPropertyChanged
         }
     }
 
-    public string SelectedBeerName => SelectedBeer?.Name ?? "Selectionnez une biere";
+    public string SelectedBeerName => SelectedBeer?.Name ?? "Select a beer";
 
-    public string SelectedBeerImage => SelectedBeer?.Image ?? "lager.png";
+    public string SelectedBeerImage => SelectedBeer?.Image ?? string.Empty;
 
     public string SelectedBeerDescription
     {
@@ -74,7 +74,7 @@ public class ShopViewModel : INotifyPropertyChanged
         {
             if (SelectedBeer is null)
             {
-                return "Touchez un item pour voir le detail.";
+                return "Tap an item to view details.";
             }
 
             var price = SelectedBeer.Price ?? "n/a";
@@ -87,7 +87,7 @@ public class ShopViewModel : INotifyPropertyChanged
                 ? $"{rating.Average:0.0}/5 ({rating.Reviews ?? "n/a"})"
                 : "n/a";
 
-            return $"Prix: {price} | Note: {ratingText}";
+            return $"Price: {price} | Rating: {ratingText}";
         }
     }
 
@@ -99,15 +99,17 @@ public class ShopViewModel : INotifyPropertyChanged
         }
 
         _isLoading = true;
-        LoadStatusText = "Chargement des bieres...";
+        LoadStatusText = "Loading beers...";
 
         try
         {
+            await _beerCatalogService.EnsureLoadedAsync();
+
             if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
             {
                 Beers.Clear();
                 SelectedBeer = null;
-                LoadStatusText = "Pas d'acces Internet sur l'appareil.";
+                LoadStatusText = "No Internet access on this device.";
                 OnPropertyChanged(nameof(BeerCountText));
                 return;
             }
@@ -130,7 +132,7 @@ public class ShopViewModel : INotifyPropertyChanged
             SelectedBeer = Beers.FirstOrDefault();
             LoadStatusText = Beers.Count > 0
                 ? string.Empty
-                : (_beerService.LastError ?? "Aucune biere chargee. Verifie la connexion Internet.");
+                : (_beerService.LastError ?? "No beers loaded. Check your Internet connection.");
         }
         finally
         {

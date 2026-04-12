@@ -19,6 +19,7 @@ public static class MauiProgram
             });
 
         builder.Services.AddSingleton<BeerService>();
+        builder.Services.AddSingleton<LocalDatabaseService>();
         builder.Services.AddSingleton<BeerCatalogService>();
         builder.Services.AddSingleton<FavoritesService>();
         builder.Services.AddSingleton<ShopViewModel>();

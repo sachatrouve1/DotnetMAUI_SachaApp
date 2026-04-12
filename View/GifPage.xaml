@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SachaApp.View.GifPage"
              Title="GIF Player">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" />
+    </Shell.BackButtonBehavior>
+
     <Grid Padding="24" RowDefinitions="*,Auto" RowSpacing="16">
         <Image x:Name="GifImage"
                Source="beer_time.gif"

@@ -35,8 +35,8 @@ public class LabViewModel : INotifyPropertyChanged
         _beerCatalogService = beerCatalogService;
         _favoritesService = favoritesService;
 
-        ToggleFavoriteCommand = new Command(ToggleFavoriteForSelected);
-        ToggleWishlistCommand = new Command(ToggleWishlistForSelected);
+        ToggleFavoriteCommand = new Command(async () => await ToggleFavoriteForSelectedAsync());
+        ToggleWishlistCommand = new Command(async () => await ToggleWishlistForSelectedAsync());
     }
 
     public string SelectedFilter
@@ -145,8 +145,8 @@ public class LabViewModel : INotifyPropertyChanged
 
     public string CompareNameA => SelectedBeerA?.Name ?? "Beer A";
     public string CompareNameB => SelectedBeerB?.Name ?? "Beer B";
-    public string CompareImageA => SelectedBeerA?.Image ?? "lager.png";
-    public string CompareImageB => SelectedBeerB?.Image ?? "lager.png";
+    public string CompareImageA => SelectedBeerA?.Image ?? string.Empty;
+    public string CompareImageB => SelectedBeerB?.Image ?? string.Empty;
     public string CompareDetailsA => FormatBeerDetails(SelectedBeerA);
     public string CompareDetailsB => FormatBeerDetails(SelectedBeerB);
 
@@ -162,6 +162,9 @@ public class LabViewModel : INotifyPropertyChanged
 
         try
         {
+            await _beerCatalogService.EnsureLoadedAsync();
+            await _favoritesService.EnsureLoadedAsync();
+
             var apiBeers = new List<Beer>();
             if (Connectivity.Current.NetworkAccess == NetworkAccess.Internet)
             {
@@ -195,26 +198,26 @@ public class LabViewModel : INotifyPropertyChanged
         }
     }
 
-    private void ToggleFavoriteForSelected()
+    private async Task ToggleFavoriteForSelectedAsync()
     {
         if (SelectedListBeer is null)
         {
             return;
         }
 
-        _favoritesService.ToggleFavorite(SelectedListBeer);
+        await _favoritesService.ToggleFavoriteAsync(SelectedListBeer);
         OnPropertyChanged(nameof(SelectedListBeerTagText));
         ApplyFilter();
     }
 
-    private void ToggleWishlistForSelected()
+    private async Task ToggleWishlistForSelectedAsync()
     {
         if (SelectedListBeer is null)
         {
             return;
         }
 
-        _favoritesService.ToggleWishlist(SelectedListBeer);
+        await _favoritesService.ToggleWishlistAsync(SelectedListBeer);
         OnPropertyChanged(nameof(SelectedListBeerTagText));
         ApplyFilter();
     }

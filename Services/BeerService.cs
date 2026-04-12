@@ -45,7 +45,7 @@ public class BeerService
                     using var response = await _httpClient.GetAsync(endpoint);
                     if (!response.IsSuccessStatusCode)
                     {
-                        LastError = $"Connexion API echouee (HTTP {(int)response.StatusCode}).";
+                        LastError = $"API connection failed (HTTP {(int)response.StatusCode}).";
                         if ((int)response.StatusCode >= 500 && attempt < maxAttempts)
                         {
                             await Task.Delay(350 * attempt);
@@ -63,11 +63,11 @@ public class BeerService
                             doc.RootElement.TryGetProperty("message", out var messageElement) &&
                             messageElement.ValueKind == JsonValueKind.String)
                         {
-                            LastError = messageElement.GetString() ?? "Format de reponse API invalide.";
+                            LastError = messageElement.GetString() ?? "Invalid API response format.";
                         }
                         else
                         {
-                            LastError = "Format de reponse API invalide.";
+                            LastError = "Invalid API response format.";
                         }
 
                         break;
@@ -95,12 +95,12 @@ public class BeerService
                         return beers;
                     }
 
-                    LastError = "Aucune donnee recue depuis l'API.";
+                    LastError = "No data received from the API.";
                     break;
                 }
                 catch (Exception ex)
                 {
-                    LastError = $"Connexion API echouee: {ex.Message}";
+                    LastError = $"API connection failed: {ex.Message}";
                     if (attempt < maxAttempts)
                     {
                         await Task.Delay(350 * attempt);

@@ -12,6 +12,42 @@ public enum BeerTag
 public class FavoritesService
 {
     private readonly Dictionary<int, BeerTag> _tagsByBeerId = [];
+    private readonly LocalDatabaseService _databaseService;
+    private bool _isLoaded;
+
+    public FavoritesService()
+        : this(new LocalDatabaseService())
+    {
+    }
+
+    public FavoritesService(LocalDatabaseService databaseService)
+    {
+        _databaseService = databaseService;
+    }
+
+    public async Task EnsureLoadedAsync()
+    {
+        if (_isLoaded)
+        {
+            return;
+        }
+
+        var storedTags = await _databaseService.GetBeerTagsAsync();
+        _tagsByBeerId.Clear();
+
+        foreach (var record in storedTags)
+        {
+            var mappedTag = Enum.IsDefined(typeof(BeerTag), record.TagValue)
+                ? (BeerTag)record.TagValue
+                : BeerTag.None;
+            if (mappedTag != BeerTag.None)
+            {
+                _tagsByBeerId[record.BeerId] = mappedTag;
+            }
+        }
+
+        _isLoaded = true;
+    }
 
     public BeerTag GetTag(Beer? beer)
     {
@@ -27,26 +63,52 @@ public class FavoritesService
 
     public bool IsWishlist(Beer? beer) => GetTag(beer) == BeerTag.Wishlist;
 
-    public void ToggleFavorite(Beer? beer)
+    public async Task ToggleFavoriteAsync(Beer? beer)
     {
         if (beer is null)
         {
             return;
         }
 
+        await EnsureLoadedAsync();
+
         var currentTag = GetTag(beer);
-        _tagsByBeerId[beer.Id] = currentTag == BeerTag.Favorite ? BeerTag.None : BeerTag.Favorite;
+        var nextTag = currentTag == BeerTag.Favorite ? BeerTag.None : BeerTag.Favorite;
+
+        if (nextTag == BeerTag.None)
+        {
+            _tagsByBeerId.Remove(beer.Id);
+        }
+        else
+        {
+            _tagsByBeerId[beer.Id] = nextTag;
+        }
+
+        await _databaseService.SaveBeerTagAsync(beer.Id, nextTag);
     }
 
-    public void ToggleWishlist(Beer? beer)
+    public async Task ToggleWishlistAsync(Beer? beer)
     {
         if (beer is null)
         {
             return;
         }
 
+        await EnsureLoadedAsync();
+
         var currentTag = GetTag(beer);
-        _tagsByBeerId[beer.Id] = currentTag == BeerTag.Wishlist ? BeerTag.None : BeerTag.Wishlist;
+        var nextTag = currentTag == BeerTag.Wishlist ? BeerTag.None : BeerTag.Wishlist;
+
+        if (nextTag == BeerTag.None)
+        {
+            _tagsByBeerId.Remove(beer.Id);
+        }
+        else
+        {
+            _tagsByBeerId[beer.Id] = nextTag;
+        }
+
+        await _databaseService.SaveBeerTagAsync(beer.Id, nextTag);
     }
 }
 

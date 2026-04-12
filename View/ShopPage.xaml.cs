@@ -3,12 +3,12 @@ using SachaApp.ViewModel;
 
 namespace SachaApp.View;
 
-public partial class Page2
+public partial class ShopPage
 {
     private BubbleAnimator? _bubbleAnimator;
     private readonly Page2ViewModel _viewModel = new();
 
-    public Page2()
+    public ShopPage()
     {
         InitializeComponent();
         BindingContext = _viewModel;

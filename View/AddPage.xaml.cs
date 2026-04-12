@@ -3,11 +3,11 @@ using SachaApp.Animations;
 
 namespace SachaApp.View;
 
-public partial class Page3 : ContentPage
+public partial class AddPage : ContentPage
 {
     private BubbleAnimator? _bubbleAnimator;
 
-    public Page3()
+    public AddPage()
     {
         InitializeComponent();
     }

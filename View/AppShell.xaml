@@ -9,11 +9,11 @@
         <Tab Title="Home" Icon="home.svg">
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage" />
         </Tab>
-        <Tab Title="Lager" Icon="search.svg">
-            <ShellContent ContentTemplate="{DataTemplate local:Page2}" Route="Page2" />
+        <Tab Title="Shop" Icon="search.svg">
+            <ShellContent ContentTemplate="{DataTemplate local:ShopPage}" Route="ShopPage" />
         </Tab>
-        <Tab Title="Stout" Icon="favorite.svg">
-            <ShellContent ContentTemplate="{DataTemplate local:Page3}" Route="Page3" />
+        <Tab Title="You beer" Icon="favorite.svg">
+            <ShellContent ContentTemplate="{DataTemplate local:AddPage}" Route="AddPage" />
         </Tab>
         <Tab Title="Pilsner" Icon="settings.svg">
             <ShellContent ContentTemplate="{DataTemplate local:Page4}" Route="Page4" />

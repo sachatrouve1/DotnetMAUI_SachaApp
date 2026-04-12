@@ -1,7 +1,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using SachaApp.Model;
 using SachaApp.Services;
 
@@ -16,8 +15,6 @@ public class Page2ViewModel : INotifyPropertyChanged
 
     public ObservableCollection<Beer> Beers { get; } = [];
 
-    public ICommand RetryCommand { get; }
-
     public event PropertyChangedEventHandler? PropertyChanged;
 
     public Page2ViewModel()
@@ -28,7 +25,6 @@ public class Page2ViewModel : INotifyPropertyChanged
     public Page2ViewModel(BeerService beerService)
     {
         _beerService = beerService;
-        RetryCommand = new Command(() => _ = LoadAsync());
     }
 
     public string BeerCountText => $"{Beers.Count} elements";

@@ -87,10 +87,10 @@
       <MauiXaml Update="View\GifPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
-      <MauiXaml Update="View\Page2.xaml">
+      <MauiXaml Update="View\ShopPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
-      <MauiXaml Update="View\Page3.xaml">
+      <MauiXaml Update="View\AddPage.xaml">
         <SubType>Designer</SubType>
       </MauiXaml>
       <MauiXaml Update="View\Page4.xaml">
@@ -113,11 +113,11 @@
         <DependentUpon>GifPage.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="View\Page2.xaml.cs">
+      <Compile Update="View\ShopPage.xaml.cs">
         <DependentUpon>Page2.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="View\Page3.xaml.cs">
+      <Compile Update="View\AddPage.xaml.cs">
         <DependentUpon>Page3.xaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>

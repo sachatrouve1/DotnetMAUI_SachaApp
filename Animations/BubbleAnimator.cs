@@ -48,8 +48,8 @@ public sealed class BubbleAnimator
             try
             {
                 await Task.WhenAll(
-                    bubble.TranslateTo(startX + _random.Next(-12, 12), endY, duration, Easing.SinOut),
-                    bubble.FadeTo(0.1, duration));
+                    bubble.TranslateToAsync(startX + _random.Next(-12, 12), endY, duration, Easing.SinOut),
+                    bubble.FadeToAsync(0.1, duration));
 
                 await Task.Delay(_random.Next(150, 700), token);
             }
